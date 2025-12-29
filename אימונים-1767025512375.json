@@ -1,0 +1,234 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 4,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "חזור לרשימת אימונים",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "panels": [
+    {
+      "datasource": {
+        "uid": "df8jr7ddlk8aod"
+      },
+      "description": "כמה זמן היה האימון של המתאמן",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 400000,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "super-light-blue",
+                "value": 0
+              },
+              {
+                "color": "light-purple",
+                "value": 60
+              },
+              {
+                "color": "dark-purple",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "queryText": "SELECT timeInMs\nFROM PlayerStats \nWHERE name = 'Amelie Griffith' AND strftime(date) = '2025-05-30T16:20:40Z'\n",
+          "queryType": "table",
+          "rawQueryText": "SELECT timeInMs\nFROM PlayerStats \nWHERE name = '$player' AND strftime(date) = '$date'\n",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "זמן תעופה",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "df8jr7ddlk8aod"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": 0
+              },
+              {
+                "color": "super-light-purple",
+                "value": 70
+              },
+              {
+                "color": "dark-purple",
+                "value": 85
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "df8jr7ddlk8aod"
+          },
+          "queryText": "SELECT (CAST(NumberOfPassedRings AS FLOAT) * 100) / CAST(TotalNumberOfRings AS FLOAT)\nFROM PlayerStats \nWHERE name = 'tali' AND strftime(date) = '2025.12.29-14.04.06'",
+          "queryType": "table",
+          "rawQueryText": "SELECT (CAST(NumberOfPassedRings AS FLOAT) * 100) / CAST(TotalNumberOfRings AS FLOAT)\nFROM PlayerStats \nWHERE name = '$player' AND strftime(date) = '$date'",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "New panel",
+      "type": "gauge"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "Amelie Griffith",
+          "value": "Amelie Griffith"
+        },
+        "datasource": {
+          "type": "frser-sqlite-datasource",
+          "uid": "df8jr7ddlk8aod"
+        },
+        "definition": "SELECT DISTINCT name FROM PlayerStats",
+        "label": "Choose Trainee",
+        "name": "player",
+        "options": [],
+        "query": "SELECT DISTINCT name FROM PlayerStats",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "2025-05-30T16:20:40Z",
+          "value": "2025-05-30T16:20:40Z"
+        },
+        "datasource": {
+          "type": "frser-sqlite-datasource",
+          "uid": "df8jr7ddlk8aod"
+        },
+        "definition": "SELECT date FROM PlayerStats  WHERE name = '$player'",
+        "label": "Session Date",
+        "name": "date",
+        "options": [],
+        "query": "SELECT date FROM PlayerStats  WHERE name = '$player'",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "אימונים",
+  "uid": "adnk94p",
+  "version": 19
+}
